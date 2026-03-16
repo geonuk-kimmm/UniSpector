@@ -1,43 +1,341 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniSpector Project Page</title>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="URECA">
+  <meta property="og:title" content="URECA"/>
+  <meta property="og:description" content="Unique Region Caption Anything"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="unispector/assets/unispector_overview.jpg" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="URECA">
+  <meta name="twitter:description" content="URECA">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="unispector/assets/unispector_overview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>URECA</title>
+  <link rel="icon" type="image/x-icon" href="unispector/assets/unispector_overview.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
 </head>
 <body>
-  <header>
-    <h1>UniSpector</h1>
-    <h2>Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR'26)</h2>
-  </header>
 
-  <main>
-    <section>
-      <h2>Overview</h2>
-    </section>
 
-    <section>
-      <h2>Source Code</h2>
-      <h3>Code Release</h3>
-    </section>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title"><span class="colorful_text">URECA</span>💡: Unique Region Caption Anything</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://sangbeomlim.github.io/" target="_blank">Sangbeom Lim</a><sup>1*</sup>,</span>
+                <span class="author-block">
+                  <a href="https://junwankimm.github.io/" target="_blank">Junwan Kim</a><sup>2*</sup>,</span>
+                  <span class="author-block">
+                  <a href="https://github.com/yoon-heez" target="_blank">Heeji Yoon</a><sup>3</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://crepejung00.github.io/" target="_blank">Jaewoo Jung</a><sup>3</sup>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://cvlab.kaist.ac.kr/members/faculty" target="_blank">Seungryong Kim</a><sup>3†</sup>
+                  </span>
+            </div>
 
-    <section>
-      <h2>InsA Benchmark</h2>
-      <h3>Dataset Release</h3>
-    </section>
+                  <div class="is-size-5 publication-authors">
+                      <span class="author-block"><sup>1</sup>Korea University, <sup>2</sup>Yonsei University</span>, <sup>3</sup>KAIST AI</span>
+                      <br>
+                      <span class="author-block"><sup>*</sup>Equal Contribution, <sup>†</sup>Corresponding Author</span>
+                      <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+                    </div>
+                    <div>
+                    <span class="is-size-5 publication-venue">ArXiv 2025</span>
+                  </div>
 
-    <section>
-      <h2>Method</h2>
-    </section>
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2504.05305" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
 
-    <section>
-      <h2>Results</h2>
-    </section>
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/cvlab-kaist/URECA" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <svg class="svg-inline--fa fa-github fa-w-16" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
 
-    <section>
-      <h2>Citation</h2>
-    </section>
-  </main>
-</body>
-</html>
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2504.05305" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                </span>
 
+                <!-- Dataset Link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/junwann/URECA" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <svg class="svg-inline--fa fa-database fa-w-14" style="width: 20px; height: 20px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="database" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"></path></svg><!-- <i class="fas fa-database"></i> Font Awesome fontawesome.com -->
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+                </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <figure class="image-container">
+        <div class="zoomcaption">🔍 Click to zoom in</div>
+        <img class="teaser-image" src="unispector/assets/unispector_overview.jpg">
+        <figcaption>
+<!--          <br><b>Figure 1: Representative demo examples of Omni-RGPT.</b>-->
+          We introduce URECA dataset, a novel region-level captioning dataset designed to ensure
+          caption uniqueness and support multi-granularity regions. Each caption in our benchmark is uniquely mapped to its corresponding region,
+          capturing distinctive attributes that differentiate it from surrounding areas. Moreover, we show that our proposed model trained on our
+          dataset effectively generates unique captions for regions at any level of granularity.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Region-level captioning aims to generate natural language descriptions for specific image regions while highlighting their distinguishing features.
+            However, existing methods struggle to produce unique captions across multi-granularity, limiting their real-world applicability.
+            To address the need for detailed region-level understanding, we introduce URECA dataset, a large-scale dataset tailored for multi-granularity region captioning.
+            Unlike prior datasets that focus primarily on salient objects, URECA dataset ensures a unique and consistent mapping between regions and captions by incorporating a diverse set of objects, parts, and background elements.
+            Central to this is a stage-wise data curation pipeline, where each stage incrementally refines region selection and caption generat         By leveraging Multimodal Large Language Models (MLLMs) at each stage, our pipeline produces distinctive and contextually grounded captions with improved accuracy and semantic diversity.
+            Building upon this dataset, we present URECA, a novel captioning model designed to effectively encode multi-granularity regions.
+            URECA maintains essential spatial properties such as position and shape through simple yet impactful modifications to existing MLLMs, enabling fine-grained and semantically rich region descriptions.
+            Our approach introduces dynamic mask modeling and a high-resolution mask encoder to enhance caption uniqueness.
+            Experiments show that URECA achieves state-of-the-art performance on URECA dataset and generalizes well to existing region-level captioning benchmarks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3 has-text-centered">URECA Dataset</h2>
+            <h2 class="content has-text-justified">
+              Automated data curation pipeline of URECA dataset. Our pipeline consists of four key stages to generate unique captions for
+                multi-granularity regions. In Stage 1, we construct a mask tree that captures hierarchical relationships between regions. Stage 2 generates
+                short captions based on the parent node. Stage 3 aggregates captions from child nodes, and Stage 4 ensures that each node is assigned a
+                unique caption.
+            </h2>
+          </div>
+        </div>
+        <div class="hero-body">
+          <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
+        </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Dataset Visualization</h2>
+      </div>
+    </div>
+    <div class="hero-body">
+      <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
+    </div>
+  </div>
+</section>
+
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+      <h2 class="title is-3 has-text-centered">💡URECA</h2>
+      <img src="unispector/assets/unispector_overview.jpg" alt="Teaser image" class="teaser-image">
+      <h2 class="content has-text-justified">
+          URECA enables users to generate unique captions that describe distinctive attributes of any region. The mask encoder effectively encodes multi-granularity regions while preserving their identity. The mask token serves as a localizer, guiding the LLM to generate region-specific captions based on the image and query token.
+      </h2>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+        <h2 class="content has-text-justified">
+          Qualitative results of the URECA and comparison models. Our model generates unique caption conditioned on multi-granularity regions.
+        </h2>
+      </div>
+    </div>
+    <div class="hero-body">
+      <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
+      <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+        <h2 class="content has-text-justified">
+          Performance comparison of URECA with baseline methods and previous models on various evaluation metrics, including
+          BLEU, ROUGE, METEOR, and BERTScore. The results show that URECA outperforms other methods across all metrics on URECA testset,
+          demonstrating its superior ability to generate unique captions for multi-granularity regions. Note that comparison methods are all trained on URECA dataset.
+        </h2>
+      </div>
+    </div>
+    <div class="hero-body">
+      <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Zero-shot Performance</h2>
+        <h2 class="content has-text-justified">
+          Quantitative results on region-level captioning task.
+          Performance comparison on the METEOR for the RefCOCOg and Visual Genome datasets. (Zero-Shot) refers to zero-shot transfer.
+        </h2>
+      </div>
+    </div>
+    <div class="hero-body">
+      <img src="unispector/assets/unispector_overview.jpg" alt="Method image" class="teaser-image" style="margin-left: auto; margin-right: auto; display: block; width: 60%; height: 60%">
+    </div>
+  </div>
+</section>
+
+
+<!--BibTex citation-->
+  <section class="section hero" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{lim2025ureca,
+  title={URECA: Unique Region Caption Anything},
+  author={Lim, Sangbeom and Kim, Junwan and Yoon, Heeji and Jung, Jaewoo and Kim, Seungryong},
+  journal={arXiv preprint arXiv:2504.05305},
+  year={2025}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation-->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const images = document.querySelectorAll(".teaser-image");
+    const zoomOverlay = document.createElement("div");
+    zoomOverlay.classList.add("zoom-overlay");
+
+    const zoomImage = document.createElement("img");
+    zoomOverlay.appendChild(zoomImage);
+    document.body.appendChild(zoomOverlay);
+
+    images.forEach((img) => {
+      // Preload high-res image if available
+      const highResSrc = img.getAttribute("data-highres");
+      if (highResSrc) {
+        const preloadImg = new Image();
+        preloadImg.src = highResSrc;
+      }
+
+      img.addEventListener("click", () => {
+        zoomImage.src = highResSrc || img.src;
+        zoomOverlay.classList.add("active");
+      });
+    });
+
+    // Close the zoom overlay when clicking anywhere on it.
+    zoomOverlay.addEventListener("click", () => {
+      zoomOverlay.classList.remove("active");
+      zoomImage.src = "";
+    });
+
+    // Allow closing with the ESC key.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") zoomOverlay.classList.remove("active");
+    });
+  });
+</script>
+  </body>
+  </html>
