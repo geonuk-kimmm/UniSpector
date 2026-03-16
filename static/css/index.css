@@ -139,12 +139,12 @@ body {
 }
 
 .colorful_text {
-    background: linear-gradient(90deg, #22c55e 0%, #0ea5e9 45%, #ef4444 100%);
+    background: linear-gradient(90deg, #22c55e 0%, #10b981 20%, #0ea5e9 52%, #3b82f6 70%, #ef4444 88%, #dc2626 100%);
     background-clip: text;
     color: transparent;
     transition: background-position 0.5s ease, transform 0.3s ease;
-    /* background-size: 200% 200%; */
-    background-size: 150%;
+    /* Keep full gradient range visible on short titles. */
+    background-size: 100% 100%;
 }
 
 /* Hover effect for "colorful_text" gradient */
