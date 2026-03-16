@@ -139,7 +139,7 @@ body {
 }
 
 .colorful_text {
-    background: linear-gradient(90deg, #ff7e5f, #feb47b, #ffdd59, #54a0ff);
+    background: linear-gradient(90deg, #22c55e 0%, #0ea5e9 45%, #ef4444 100%);
     background-clip: text;
     color: transparent;
     transition: background-position 0.5s ease, transform 0.3s ease;
