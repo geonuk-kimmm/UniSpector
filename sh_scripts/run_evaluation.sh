@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Usage: ./eval_batch_and_export_csv.sh <model_seed> <model_weights> <savedir> [config_file] [csv_file]
-# Example: ./eval_batch_and_export_csv.sh 42 exp_cvpr26_FINAL/closed_set_dinov/model_0019999.pth forCloseset2 configs/cvpr26_ours.yaml results.csv
-#CUDA_VISIBLE_DEVICES=0,1 bash eval_batch_and_export_csv.sh 777 exp_cvpr26_FINAL/seed777_ours_re_gumbel1.0_halfNoise/model_0019999.pth exp_cvpr26_FINAL2/seed777_ours_re_gumbel1.0_halfNoise configs/cvpr26_ours.yaml exp_cvpr26_FINAL2/results.csv
+# Usage: bash sh_scripts/run_evaluation.sh <model_seed> <model_weights> <savedir> <config_file> <csv_file>
+# Example: bash sh_scripts/run_evaluation.sh 42 exp/base/model_0019999.pth base configs/InsA_base.yaml exp/base/results.csv
+# CUDA_VISIBLE_DEVICES=0,1 bash sh_scripts/run_evaluation.sh 777 exp/base/model_0019999.pth base configs/InsA_base.yaml exp/base/results.csv
 
 
 # This script automatically evaluates all datasets:
@@ -13,41 +13,27 @@
 set -e  # Exit on error
 
 # Check if required arguments are provided
-if [ $# -lt 3 ]; then
-    echo "Usage: $0 <model_seed> <model_weights> <savedir> [config_file] [csv_file]"
-    echo "Example: $0 42 exp_cvpr26_FINAL/closed_set_dinov/model_0019999.pth forCloseset2 configs/cvpr26_ours.yaml results.csv"
+if [ $# -lt 5 ]; then
+    echo "Usage: $0 <model_seed> <model_weights> <savedir> <config_file> <csv_file>"
+    echo "Example: $0 42 exp/base/model_0019999.pth base configs/InsA_base.yaml exp/base/results.csv"
     echo ""
     echo "Arguments:"
-    echo "  model_seed:   Training seed (XXX) used in in-domain JSON paths"
+    echo "  model_seed:    Training seed (XXX) used in in-domain JSON paths"
     echo "  model_weights: Path to model weights file"
-    echo "  savedir:      Save directory name"
-    echo "  config_file:  (Optional) Config YAML file path. Default: configs/cvpr26_ours.yaml"
-    echo "  csv_file:     (Optional) CSV file path. Default: evaluation_results_summary.csv"
+    echo "  savedir:       Save directory name"
+    echo "  config_file:   Config YAML path"
+    echo "  csv_file:      CSV output path"
     exit 1
 fi
 
 MODEL_SEED=$1
 MODEL_WEIGHTS=$2
 SAVEDIR=$3
-
-# Default config file
-CONFIG_FILE="configs/InsA_dinov.yaml"
-CSV_FILE="evaluation_results_summary.csv"
-
-# Parse optional arguments
-i=4
-while [ $i -le $# ]; do
-    arg="${!i}"
-    if [ -f "$arg" ] && ([[ "$arg" == *.yaml ]] || [[ "$arg" == *.yml ]]); then
-        CONFIG_FILE="$arg"
-    elif [[ "$arg" == *.csv ]] || [ -z "${arg##*/*}" ]; then
-        CSV_FILE="$arg"
-    fi
-    i=$((i + 1))
-done
+CONFIG_FILE=$4
+CSV_FILE=$5
 
 # Base paths
-BASE_PATH="/aidata01/visual_prompt/dataset/InsA_rel"
+BASE_PATH="ROOTPATH_ANNOTATION"
 IN_DOMAIN_BASE="${BASE_PATH}/in-domain/unseen"
 OUT_DOMAIN_BASE="${BASE_PATH}/out-domain"
 
@@ -264,7 +250,7 @@ run_evaluation_with_retry() {
         echo "Running evaluation (attempt $((retry_count + 1))/$MAX_RETRIES)..."
         # Use CUDA_VISIBLE_DEVICES from environment (inherited from parent process)
         # If not set, it will use the default in eval_openset_only.sh
-        if bash sh_scripts/eval_openset_only2.sh "$json_file" "$model_weights" "$savedir" "$CONFIG_FILE"; then
+        if bash sh_scripts/eval_openset_only.sh "$json_file" "$model_weights" "$savedir" "$CONFIG_FILE"; then
             success=true
             break
         else

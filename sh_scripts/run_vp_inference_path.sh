@@ -1,1 +1,0 @@
-python inference_with_predefined_prompt.py --ckpt ./model_250414.pth --target_path ./samples/target --prompt_path ./samples/prompt --save_path ./samples_result

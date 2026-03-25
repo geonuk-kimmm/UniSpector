@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Usage: ./eval_openset.sh <data_json> <model_weights> <savedir> [config_file] [--visualize]
-# Example: ./eval_openset.sh /aidata01/visual_prompt/dataset/InsA/in-domain/unseen/GC10/prompt/GC10_unseen_seed42_prompt_seed42.json exp_cvpr26/dinov_720img/model_0017499.pth results configs/cvpr26_ours.yaml --visualize
+# Usage: bash sh_scripts/eval_openset_only.sh <data_json> <model_weights> <savedir> [config_file] [--visualize]
+# Example: bash sh_scripts/eval_openset_only.sh /path/to/data.json exp/model.pth results configs/InsA_base.yaml
 
 # Check if required arguments are provided
 if [ $# -lt 3 ]; then

@@ -1,11 +1,11 @@
-## UniSpector🔍
+# UniSpector🔍
 Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR 2026)
+
 
 ---
 
 ## News
-- **[2026/04]** Due to corporate security policy, the full UniSpector source code cannot be released.  
-  We instead release code for training, testing, and demo on our benchmark/tasks, built on [DINOv](https://github.com/UX-Decoder/DINOv), which serves as the code base and baseline for our work.
+- **[2026/04]** We release our code base for training, testing, and demo on our benchmark/tasks, built on [DINOv](https://github.com/UX-Decoder/DINOv). The full UniSpector implementation will be released soon.
 
 ---
 
@@ -95,6 +95,7 @@ export DETECTRON2_DATASETS=/path/to/{dataset_dir}
 
 ---
 
+
 ## Training
 ```bash
 python train_net.py --config TRAINING_CONFIGS --data_json DATASET_JSON_PATH
@@ -113,12 +114,19 @@ python demo_gradio.py
 ---
 
 ## Evaluation
-TBU
+```bash
+bash sh_scripts/run_evaluation.sh MODEL_SEED MODEL_WEIGHTS SAVEDIR CONFIG_FILE CSV_FILE
+```
+
+- `MODEL_SEED`: Training seed (e.g. `42`, `82`, `777`).
+- `MODEL_WEIGHTS`: Checkpoint file path.
+- `SAVEDIR`: Output subfolder name for this run.
+- `CONFIG_FILE`: YAML config path.
+- `CSV_FILE`: CSV path; bbox/mask AP rows are appended.
+
+Set `BASE_PATH` in `sh_scripts/run_evaluation.sh` to your InsA annotation root.
 
 ---
 
 ## Citation
-TBU
-
-## Contact
 TBU
