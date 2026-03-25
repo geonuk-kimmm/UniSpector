@@ -1,0 +1,124 @@
+## UniSpector🔍
+Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR 2026)
+
+---
+
+## News
+- **[2026/04]** Due to corporate security policy, the full UniSpector source code cannot be released.  
+  We instead release code for training, testing, and demo on our benchmark/tasks, built on [DINOv](https://github.com/UX-Decoder/DINOv), which serves as the code base and baseline for our work.
+
+---
+
+## Installation
+```bash
+# 1) Create environment
+conda create -n vp-py38 python=3.8 -y
+conda activate vp-py38
+
+# 2) Clone repository
+git clone https://github.com/geonuk-kimmm/UniSpector
+cd UniSpector
+
+# 3) Install dependencies
+sh install.sh
+```
+
+---
+
+## Dataset Preparation
+1.Download the InsA benchmark datasets from the links below:
+<details>
+
+<summary><strong>Dataset links (click to expand)</strong></summary>
+
+- **GC10**: [Kaggle](https://www.kaggle.com/datasets/alex000kim/gc10det)
+- **MagneticTile**: [GitHub](https://github.com/abin24/Magnetic-tile-defect-datasets)
+- **Real-IAD**: [Hugging Face](https://huggingface.co/datasets/Real-IAD/Real-IAD)
+  - We use the **1024x1024** version: [realiad_1024](https://huggingface.co/datasets/Real-IAD/Real-IAD/tree/main/realiad_1024)
+- **MVTec-AD**: [Official Download Page](https://www.mvtec.com/company/research/datasets/mvtec-ad/downloads)
+- **3CAD**: [GitHub](https://github.com/EnquanYang2022/3CAD), [Google Drive](https://drive.google.com/file/d/1BIX0H8TZp0wmrAnXPw8_aCAIX1j1Fzwz/view)
+- **VISION**: [Hugging Face](https://huggingface.co/datasets/VISION-Workshop/VISION-Datasets)
+- **VisA**: [GitHub](https://github.com/amazon-science/spot-diff), [Direct Download](https://amazon-visual-anomaly.s3.us-west-2.amazonaws.com/VisA_20220922.tar)
+
+</details>
+<br>
+2.Organize the dataset directory using the following structure:
+<details>
+<summary><strong>Directory layout (click to expand)</strong></summary>
+
+```bash
+{dataset_dir}/
+├── GC10/ds/img/
+│   └── *.jpg
+├── MagneticTile/
+│   ├── {MagneticTile_category}/Imgs/  # e.g., MT_Blowhole/Imgs/
+│   │   └── *.jpg
+│   └── ...
+├── Real-IAD/realiad-1024/
+│   ├── {Real-IAD_product}/NG/  # e.g., audiojack/NG/
+│   │   ├── {Real-IAD_defect_code}/{product_id}/  # e.g., BX/S0001/
+│   │   │   └── *.jpg
+│   │   └── ...
+│   └── ...
+├── MVTec-AD/
+│   ├── {MVTec-AD_product}/test/  # e.g., bottle/test/
+│   │   ├── {MVTec-AD_defect_type}/  # e.g., broken_large/
+│   │   │   └── *.jpg
+│   │   └── ...
+│   └── ...
+├── 3CAD/
+│   ├── {3CAD_product}/test/  # e.g., Aluminum_Camera_Cover/test/
+│   │   ├── {3CAD_defect_type}/  # e.g., bruise/
+│   │   │   └── *.jpg
+│   │   └── ...
+│   └── ...
+├── VISION/
+│   ├── {VISION_product}/  # e.g., Cable/
+│   │   ├── train/
+│   │   │   └── *.jpg
+│   │   └── val/
+│   │       └── *.jpg
+│   └── ...
+└── VisA/
+    ├── {VisA_product}/Data/Images/Anomaly/  # e.g., candle/Data/Images/Anomaly/
+    │   └── *.jpg
+    └── ...
+```
+
+</details>
+<br>
+3.Set the `DETECTRON2_DATASETS` environment variable:
+
+```bash
+export DETECTRON2_DATASETS=/path/to/{dataset_dir}
+```
+
+---
+
+## Training
+```bash
+python train_net.py --config TRAINING_CONFIGS --data_json DATASET_JSON_PATH
+```
+
+- `TRAINING_CONFIGS`: YAML config containing batch size, learning rate, and other options.
+- `DATASET_JSON_PATH`: COCO-format annotation JSON path.
+
+---
+
+## Demo
+```bash
+python demo_gradio.py
+```
+
+---
+
+## Evaluation
+TBU
+
+---
+
+## Citation
+TBU
+
+## Contact
+TBU
