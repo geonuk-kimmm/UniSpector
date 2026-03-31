@@ -23,6 +23,8 @@ cd UniSpector
 sh install.sh
 ```
 
+We used PyTorch 2.4.1 and torchvision 0.19.1 with CUDA / nvcc 12.4 on NVIDIA H100.
+
 ---
 
 ## Dataset Preparation
@@ -98,19 +100,19 @@ export DETECTRON2_DATASETS=/path/to/{dataset_dir}
 
 ## Training
 ```bash
-python train_net.py --config TRAINING_CONFIGS --data_json DATASET_JSON_PATH
+python train_net.py --config CONFIG_FILE --data_json DATASET_JSON_PATH
 ```
 
-- `TRAINING_CONFIGS`: YAML config containing batch size, learning rate, and other options.
+- `CONFIG_FILE`: YAML config containing model setting, batch size, learning rate, and other options.
 - `DATASET_JSON_PATH`: COCO-format annotation JSON path.
 
 ---
 
 ## Demo
 ```bash
-python demo_gradio.py
+python demo_gradio.py --config CONFIG_FILE
 ```
-
+- `CONFIG_FILE`: YAML config containing model setting.
 ---
 
 ## Evaluation
