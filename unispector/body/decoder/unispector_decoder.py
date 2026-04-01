@@ -614,6 +614,54 @@ class UnSpectorDecoder(nn.Module):
         
         return input_query_label,input_query_bbox,attn_mask,mask_dict
 
+    def prepare_for_visual_query_from_batch(self, targets, src_features, size_list, return_all_content_tokens=False):
+        """
+        Build visual-query tensors for a single forward (e.g. demo / get_visual_prompt_content_feature).
+        Uses prepare_visual_prompt only (no distributed multi-GPU sampling).
+        """
+        input_label_embed, input_bbox_embed, attn_mask_list, size_list_all, input_tokens_all, bs, num_examples = self.prepare_visual_prompt(
+            targets, src_features, size_list, return_all_content_tokens)
+        device = src_features[0].device
+
+        # [T, D] -> [1, T, D]; demo path uses len(targets)==1
+        new_input_tokens = input_tokens_all.unsqueeze(0)
+        if input_label_embed.shape[1] < new_input_tokens.shape[1]:
+            input_label_embed = input_label_embed[:, 0].unsqueeze(1).repeat(1, new_input_tokens.shape[1], 1)
+            input_bbox_embed = input_bbox_embed[:, 0].unsqueeze(1).repeat(1, new_input_tokens.shape[1], 1)
+
+        input_label_embed = input_label_embed[:, :new_input_tokens.shape[1]] + new_input_tokens
+        input_bbox_embed = input_bbox_embed[:, :new_input_tokens.shape[1]]
+        single_pad = self.num_content_tokens
+        scalar = int(input_label_embed.shape[1] / self.num_content_tokens)
+        pad_size = input_label_embed.shape[1]
+
+        if input_label_embed.shape[1] > 0:
+            input_query_label = input_label_embed
+            input_query_bbox = input_bbox_embed
+        else:
+            input_query_label = input_label_embed
+            input_query_bbox = input_bbox_embed
+
+        tgt_size = pad_size
+        attn_mask = torch.ones(tgt_size, tgt_size, device=device) < 0
+        attn_mask[pad_size:, :pad_size] = True
+        for i in range(scalar):
+            if i == 0:
+                attn_mask[single_pad * i:single_pad * (i + 1), single_pad * (i + 1):pad_size] = True
+            if i == scalar - 1:
+                attn_mask[single_pad * i:single_pad * (i + 1), :single_pad * i] = True
+            else:
+                attn_mask[single_pad * i:single_pad * (i + 1), single_pad * (i + 1):pad_size] = True
+                attn_mask[single_pad * i:single_pad * (i + 1), :single_pad * i] = True
+        mask_dict = {
+            'pad_size': pad_size,
+            'scalar': scalar,
+            'num_class': len(targets),
+        }
+
+        del attn_mask_list, size_list_all, num_examples
+        return input_query_label, input_query_bbox, attn_mask, mask_dict
+
     def prepare_visual_query_from_all_examples(self, targets, src_features, size_list, return_all_content_tokens=False):
         from safetensors import safe_open
         import os

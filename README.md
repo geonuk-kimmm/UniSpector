@@ -1,4 +1,4 @@
-# UniSpector🔍
+# UniSpector
 Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR 2026)
 
 

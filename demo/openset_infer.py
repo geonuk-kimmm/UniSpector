@@ -26,7 +26,7 @@ def preprocess_image(pil_img):
     return tensor_img, height, width
 
 
-def get_prompt_feature(model, prompt_examples, image_size=1024):
+def get_prompt_feature(model, prompt_examples, image_size=720):
     # 1. Remove None entries from prompt examples
     prompt_examples = [ex for ex in prompt_examples if ex is not None]
 
@@ -81,7 +81,7 @@ def infer_target_image(
     prompt_pad_w,
     target_image,    # image_tgt -> target_image: target image for segmentation (np array)
     threshold=0.1,
-    image_size=1024,
+    image_size=720,
     hole_scale=100,
     island_scale=100,
     is_compute_perf=False,
@@ -89,6 +89,9 @@ def infer_target_image(
 ):
     # 1. Define image preprocessing transform
     resize_transform = transforms.Resize((int(image_size), int(image_size)), interpolation=Image.BICUBIC)
+
+    # Original size (RGB numpy H,W,3) — final visualization is resized back here so bbox/text scale match.
+    orig_h, orig_w = int(target_image.shape[0]), int(target_image.shape[1])
 
     # 2. Preprocess target image
     target_pil = Image.fromarray(target_image)
@@ -122,11 +125,17 @@ def infer_target_image(
             is_compute_perf = is_compute_perf
     )
 
+    def _viz_to_original_size(rgb: np.ndarray) -> np.ndarray:
+        """Resize visualization canvas (model input resolution) to original image dimensions."""
+        if rgb.shape[0] == orig_h and rgb.shape[1] == orig_w:
+            return rgb
+        return cv2.resize(rgb, (orig_w, orig_h), interpolation=cv2.INTER_LANCZOS4)
+
     # 8. If no result, return original image
     if masks is None:
-        
         visualizer = Visualizer(target_resized, metadata=metadata)
-        return visualizer.draw_text(text='', position=[0, 0]).get_image(), None
+        out = visualizer.draw_text(text='', position=[0, 0]).get_image()
+        return _viz_to_original_size(out), None
 
     # 9. Sort results and visualize
     sorted_ids = torch.argsort(class_scores, descending=True)
@@ -151,6 +160,17 @@ def infer_target_image(
             break
 
     result_img = vis_instance.get_image()
-    
+    vis_h, vis_w = result_img.shape[0], result_img.shape[1]
+    result_img = _viz_to_original_size(result_img)
+    # Keep returned boxes in the same pixel space as result_img (original image).
+    if vis_w > 0 and vis_h > 0:
+        sx = orig_w / float(vis_w)
+        sy = orig_h / float(vis_h)
+        sorted_boxes = sorted_boxes.clone()
+        sorted_boxes[:, 0] *= sx
+        sorted_boxes[:, 2] *= sx
+        sorted_boxes[:, 1] *= sy
+        sorted_boxes[:, 3] *= sy
+
     print(class_scores)
     return result_img, class_scores, sorted_boxes

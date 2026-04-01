@@ -13,6 +13,23 @@ import os
 os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
 from pathlib import Path
 
+
+def infer_num_classes_from_checkpoint(ckpt_path):
+    """Recover NUM_CLASSES from checkpoint: len(criterion.empty_weight) == num_classes + 1."""
+    try:
+        sd = torch.load(ckpt_path, map_location="cpu")
+    except Exception:
+        return None
+    if isinstance(sd, dict) and "model" in sd:
+        sd = sd["model"]
+    if not isinstance(sd, dict):
+        return None
+    for k, v in sd.items():
+        if k.endswith("criterion.empty_weight") and torch.is_tensor(v) and v.dim() == 1:
+            return int(v.shape[0]) - 1
+    return None
+
+
 def resize_bbox_to_raw(boxes,h1,w1,h2,w2 ):
     boxes[:,:1]=(boxes[:,:1]/w1)*w2
     boxes[:,1:2]=(boxes[:,1:2]/h1)*h2
@@ -22,7 +39,7 @@ def resize_bbox_to_raw(boxes,h1,w1,h2,w2 ):
 
 def parse_option():
     parser = argparse.ArgumentParser('Open-set Inspection demo', add_help=False)
-    parser.add_argument('--conf_files', default="configs/InsA_unispector.yaml", metavar="FILE", help='path to config file', )
+    parser.add_argument('--conf_files', default="configs/base.yaml", metavar="FILE", help='path to config file', )
     parser.add_argument('--port', default=6019, type=int, help='path to ckpt', )
     args = parser.parse_args()
     return args
@@ -44,17 +61,27 @@ global model_sam
 model_sam = None
 
 def load_model(ckpt_path):
-    global model_sam
+    global model_sam, opt
     if ckpt_path:
         try:
+            # Align architecture with checkpoint
+            _nc_ckpt = infer_num_classes_from_checkpoint(ckpt_path)
+            if _nc_ckpt is not None:
+                opt['MODEL']['ENCODER']['NUM_CLASSES'] = _nc_ckpt
+            _nc = opt['MODEL']['ENCODER'].get('NUM_CLASSES')
+            if _nc is None:
+                return (
+                    "Model load failed: cannot determine NUM_CLASSES. "
+                    "Use a checkpoint that contains criterion.empty_weight."
+                )
             model_sam = BaseModel(opt, build_model(opt)).from_pretrained(ckpt_path).eval().cuda()
-            return "Model loaded successfully."
+            return f"Model loaded successfully."
         except Exception as e:
             return f"Model load failed: {str(e)}"
     return "Please provide a checkpoint path."
 
 @torch.no_grad()
-def _extract_prompt_embedding(in_context_examples, image_size=240):
+def _extract_prompt_embedding(in_context_examples, image_size=720):
     with torch.autocast(device_type='cuda', dtype=torch.float16):
         model = model_sam
         prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = get_prompt_feature(
@@ -69,7 +96,7 @@ def inference(*args, return_viz_only=True, **kwargs):
     image_tgt = args[-1]
     in_context_examples = args[:-1]
     prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = _extract_prompt_embedding(
-        in_context_examples, image_size=240
+        in_context_examples, image_size=720
     )
 
     with torch.autocast(device_type='cuda', dtype=torch.float16):
@@ -82,7 +109,7 @@ def inference(*args, return_viz_only=True, **kwargs):
             prompt_pad_h,
             prompt_pad_w,
             image_tgt,
-            image_size=240,
+            image_size=720,
             threshold=0.1,
             **kwargs,
         )
@@ -117,7 +144,7 @@ def calculate_image_statistics(images):
     return means, stds
 
 def update_pixel_stats(vp1, vp2, vp3, vp4, vp5, vp6, vp7, vp8):
-    """Update model pixel stats from prompt images."""
+    """Set model pixel_mean / pixel_std from prompt images (input normalization)."""
     global model_sam
     images = [vp1, vp2, vp3, vp4, vp5, vp6, vp7, vp8]
     means, stds = calculate_image_statistics(images)
@@ -128,7 +155,7 @@ def update_pixel_stats(vp1, vp2, vp3, vp4, vp5, vp6, vp7, vp8):
     model_sam.model.pixel_mean = new_mean
     model_sam.model.pixel_std = new_std
     
-    return f"Pixel statistics updated.\nMean: {means}\nStd: {stds}\nModel normalization updated."
+    return f"Adapted input normalization to prompt images.\nMean: {means}\nStd: {stds}"
 
 def process_directory(target_path, result_path, generic_vp1, generic_vp2, generic_vp3, 
                 generic_vp4, generic_vp5, generic_vp6, generic_vp7, generic_vp8):
@@ -139,7 +166,7 @@ def process_directory(target_path, result_path, generic_vp1, generic_vp2, generi
     processed_files = []
     prompt_inputs = [generic_vp1, generic_vp2, generic_vp3, generic_vp4, generic_vp5, generic_vp6, generic_vp7, generic_vp8]
     prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = _extract_prompt_embedding(
-        prompt_inputs, image_size=240
+        prompt_inputs, image_size=720
     )
     
     for file in os.listdir(target_path):
@@ -155,7 +182,7 @@ def process_directory(target_path, result_path, generic_vp1, generic_vp2, generi
                     prompt_pad_h,
                     prompt_pad_w,
                     target_img,
-                    image_size=240,
+                    image_size=720,
                     threshold=0.1,
                 )
             if len(results)<3: # detected None, only return raw image
@@ -209,16 +236,16 @@ with demo:
             # Checkpoint path input
             ckpt_input = gr.Textbox(
                 label="Model Checkpoint Path",
-                placeholder="exp_cvpr26_FINAL/seed42_freq_distCL_none_lrFLIP1234/model_0019999.pth",
-                value="exp_cvpr26_FINAL/seed42_freq_distCL_none_lrFLIP1234/model_0019999.pth"
+                placeholder="MODEL_PATH",
+                value="MODEL_PATH",
             )
             load_model_btn = gr.Button("1) Load Model")
             model_status = gr.Textbox(label="Model Status", interactive=False)
             
             generic.render()
 
-            update_stats_btn = gr.Button("2) Update model normalization from prompt images")
-            stats_status = gr.Textbox(label="Pixel Stats Status", interactive=False)
+            update_stats_btn = gr.Button("2) (optional) Adapt input normalization to prompt pixel distribution")
+            stats_status = gr.Textbox(label="Adaptation status", interactive=False)
             
             # Pixel statistics update event
             update_stats_btn.click(
