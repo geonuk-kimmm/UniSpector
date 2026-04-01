@@ -3,7 +3,7 @@
 # Task settings
 ##################
 VERBOSE: true
-OUTPUT_DIR: 'output_InsA/unispector_trimv4_seed777_WOoriginDetectron'
+OUTPUT_DIR: 'output_InsA/SAVE_PATH'
 LOADER: {}
 # model
 MODEL:
@@ -40,7 +40,7 @@ MODEL:
   ENCODER:
     NAME: encoder_deform
     IGNORE_VALUE: 255
-    NUM_CLASSES: 133
+    # NUM_CLASSES: set by train_net.py from len(categories) in --data_json; demo_gradio sets it from checkpoint (empty_weight) or --data_json.
     LOSS_WEIGHT: 1.0
     CONVS_DIM: 256
     MASK_DIM: 256
