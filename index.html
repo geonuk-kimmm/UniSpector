@@ -1,333 +1,623 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="UniSpector">
-  <meta property="og:title" content="UniSpector"/>
-  <meta property="og:description" content="Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="assets/unispector_overview.jpg" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniSpector: Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting</title>
+    <meta name="description" content="Project page for UniSpector: Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting">
 
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <meta name="twitter:title" content="UniSpector">
-  <meta name="twitter:description" content="UniSpector">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="assets/unispector_overview.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 
-
-  <title>UniSpector</title>
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+
 <body>
 
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title"><span class="colorful_text">UniSpector</span>🔍: Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">Geonuk Kim,</span>
-              <span class="author-block">Minhoi Kim,</span>
-              <span class="author-block">Kangil Lee,</span>
-              <span class="author-block">Minsu Kim</span>
-              <br>
-              <span class="author-block">Hyeonseong Jeon,</span>
-              <span class="author-block">Jeonghoon Han,</span>
-              <span class="author-block">Hyoungjoon Lim,</span>
-              <span class="author-block">Junho Yim</span>
-            </div>
-
-                  <div class="is-size-5 publication-authors">
-                      <span class="author-block">LG Energy Solution</span>
-                      <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
-                    </div>
-                    <div>
-                    <span class="is-size-5 publication-venue">CVPR 2026</span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/2504.05305" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <svg class="svg-inline--fa fa-file-pdf fa-w-12" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/cvlab-kaist/UniSpector" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <svg class="svg-inline--fa fa-github fa-w-16" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2504.05305" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <a href="#overview" class="sidebar-item">
+            <div class="sidebar-dot"></div>
+            <span class="sidebar-label">Overview</span>
+        </a>
+        <a href="#abstract" class="sidebar-item">
+            <div class="sidebar-dot"></div>
+            <span class="sidebar-label">Abstract</span>
+        </a>
+        <a href="#motivation" class="sidebar-item">
+            <div class="sidebar-dot"></div>
+            <span class="sidebar-label">Motivation</span>
+        </a>
+        <a href="#method" class="sidebar-item">
+            <div class="sidebar-dot"></div>
+            <span class="sidebar-label">UniSpector</span>
+        </a>
+        <div class="sidebar-group">
+            <a href="#experiments" class="sidebar-item">
+                <div class="sidebar-dot"></div>
+                <span class="sidebar-label">Experiments</span>
+            </a>
+            <div class="sidebar-subs">
+                <a href="#sub-benchmarks" class="sidebar-item sidebar-sub-item">
+                    <div class="sidebar-dot"></div>
+                    <span class="sidebar-label">Quantitative</span>
                 </a>
-                </span>
+                <a href="#sub-qual" class="sidebar-item sidebar-sub-item">
+                    <div class="sidebar-dot"></div>
+                    <span class="sidebar-label">Qualitative</span>
+                </a>
+            </div>
+        </div>
+        <a href="#citation" class="sidebar-item">
+            <div class="sidebar-dot"></div>
+            <span class="sidebar-label">Citation</span>
+        </a>
+    </div>
 
-                <!-- Dataset Link -->
-                <span class="link-block">
-                  <a href="https://huggingface.co/spaces/junwann/UniSpector" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <svg class="svg-inline--fa fa-database fa-w-14" style="width: 20px; height: 20px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="database" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor" d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"></path></svg><!-- <i class="fas fa-database"></i> Font Awesome fontawesome.com -->
-                    </span>
-                    <span>Dataset</span>
-                  </a>
-                </span>
-                </div>
+    <!-- Hero Section -->
+    <section id="overview" class="hero-section">
+        <div class="hero-container">
+            <h1 class="hero-title">
+                <span class="gradient-text">UniSpector</span>: Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting
+            </h1>
+            <p class="hero-status">CVPR 2026</p>
+
+            <div class="hero-authors">
+                <span><a href="https://geonuk-kimmm.github.io/" target="_blank" rel="noopener noreferrer">Geonuk Kim</a></span>
+                <span><a href="https://www.linkedin.com/in/%EB%AF%BC%ED%9A%8C-%EA%B9%80-081435253/" target="_blank" rel="noopener noreferrer">Minhoi Kim</a></span>
+                <span><a href="https://www.linkedin.com/in/kang-il-lee-4b6836146/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BE9FZHZ5VTKme88tYbkvfOg%3D%3D" target="_blank" rel="noopener noreferrer">Kangil Lee</a></span>
+                <span><a href="https://www.linkedin.com/in/%EB%AF%BC%EC%88%98-%EA%B9%80-861b54180/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BE9FZHZ5VTKme88tYbkvfOg%3D%3D" target="_blank" rel="noopener noreferrer">Minsu Kim</a></span>
+                <span><a href="https://www.linkedin.com/in/hyeonseong-jeon-00a1061b6/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BE9FZHZ5VTKme88tYbkvfOg%3D%3D" target="_blank" rel="noopener noreferrer">Hyeonseong Jeon</a></span>
+                <span><a href="https://openreview.net/profile?id=~JEONGHOON_HAN1" target="_blank" rel="noopener noreferrer">Jeonghoon Han</a></span>
+                <span><a href="https://www.linkedin.com/in/backnumber19lim/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BE9FZHZ5VTKme88tYbkvfOg%3D%3D" target="_blank" rel="noopener noreferrer">Hyoungjoon Lim</a></span>
+                <span><a href="https://www.linkedin.com/in/%EC%A4%80%ED%98%B8-%EC%9E%84-a1469770/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BE9FZHZ5VTKme88tYbkvfOg%3D%3D" target="_blank" rel="noopener noreferrer">Junho Yim</a></span>
               </div>
 
+            <div class="hero-affiliations">
+                <span>LG Energy Solution</span>
+            </div>
+
+
+            <!-- Link Buttons -->
+            <div class="hero-buttons">
+                <span class="btn btn-outline btn-static" aria-disabled="true" title="Coming soon">
+                    <i class="fa-solid fa-file-pdf"></i> Paper
+                </span>
+                <a href="https://github.com/geonuk-kimmm/UniSpector" class="btn btn-outline" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github"></i> Code
+                </a>
+                <a href="https://huggingface.com/datasets/geonuk-kimmm/Inspect-Anything" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/hf-logo.svg" alt="Hugging Face" class="btn-icon-hf" width="20" height="20"> Dataset
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <figure class="image-container">
-        <div class="zoomcaption">🔍 Click to zoom in</div>
-        <img class="teaser-image" src="assets/unispector_overview.jpg">
-        <figcaption>
-<!--          <br><b>Figure 1: Representative demo examples of Omni-RGPT.</b>-->
-          We introduce UniSpector dataset, a novel region-level captioning dataset designed to ensure
-          caption uniqueness and support multi-granularity regions. Each caption in our benchmark is uniquely mapped to its corresponding region,
-          capturing distinctive attributes that differentiate it from surrounding areas. Moreover, we show that our proposed model trained on our
-          dataset effectively generates unique captions for regions at any level of granularity.
-        </figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
+    
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Region-level captioning aims to generate natural language descriptions for specific image regions while highlighting their distinguishing features.
-            However, existing methods struggle to produce unique captions across multi-granularity, limiting their real-world applicability.
-            To address the need for detailed region-level understanding, we introduce UniSpector dataset, a large-scale dataset tailored for multi-granularity region captioning.
-            Unlike prior datasets that focus primarily on salient objects, UniSpector dataset ensures a unique and consistent mapping between regions and captions by incorporating a diverse set of objects, parts, and background elements.
-            Central to this is a stage-wise data curation pipeline, where each stage incrementally refines region selection and caption generat         By leveraging Multimodal Large Language Models (MLLMs) at each stage, our pipeline produces distinctive and contextually grounded captions with improved accuracy and semantic diversity.
-            Building upon this dataset, we present UniSpector, a novel captioning model designed to effectively encode multi-granularity regions.
-            UniSpector maintains essential spatial properties such as position and shape through simple yet impactful modifications to existing MLLMs, enabling fine-grained and semantically rich region descriptions.
-            Our approach introduces dynamic mask modeling and a high-resolution mask encoder to enhance caption uniqueness.
-            Experiments show that UniSpector achieves state-of-the-art performance on UniSpector dataset and generalizes well to existing region-level captioning benchmarks.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
+        <!-- TL;DR / Teaser -->
+        <div class="teaser-container">
 
-<section class="section hero">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3 has-text-centered">UniSpector Dataset</h2>
-            <h2 class="content has-text-justified">
-              Automated data curation pipeline of UniSpector dataset. Our pipeline consists of four key stages to generate unique captions for
-                multi-granularity regions. In Stage 1, we construct a mask tree that captures hierarchical relationships between regions. Stage 2 generates
-                short captions based on the parent node. Stage 3 aggregates captions from child nodes, and Stage 4 ensures that each node is assigned a
-                unique caption.
-            </h2>
-          </div>
-        </div>
-        <div class="hero-body">
-          <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
-        </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Dataset Visualization</h2>
-      </div>
-    </div>
-    <div class="hero-body">
-      <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
-    </div>
-  </div>
-</section>
-
-<section class="section hero">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-      <h2 class="title is-3 has-text-centered">💡UniSpector</h2>
-      <img src="assets/unispector_overview.jpg" alt="Teaser image" class="teaser-image">
-      <h2 class="content has-text-justified">
-          UniSpector enables users to generate unique captions that describe distinctive attributes of any region. The mask encoder effectively encodes multi-granularity regions while preserving their identity. The mask token serves as a localizer, guiding the LLM to generate region-specific captions based on the image and query token.
-      </h2>
-    </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
-        <h2 class="content has-text-justified">
-          Qualitative results of the UniSpector and comparison models. Our model generates unique caption conditioned on multi-granularity regions.
-        </h2>
-      </div>
-    </div>
-    <div class="hero-body">
-      <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
-      <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
-    </div>
-  </div>
-</section>
-
-
-<section class="section hero">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
-        <h2 class="content has-text-justified">
-          Performance comparison of UniSpector with baseline methods and previous models on various evaluation metrics, including
-          BLEU, ROUGE, METEOR, and BERTScore. The results show that UniSpector outperforms other methods across all metrics on UniSpector testset,
-          demonstrating its superior ability to generate unique captions for multi-granularity regions. Note that comparison methods are all trained on UniSpector dataset.
-        </h2>
-      </div>
-    </div>
-    <div class="hero-body">
-      <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image">
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Zero-shot Performance</h2>
-        <h2 class="content has-text-justified">
-          Quantitative results on region-level captioning task.
-          Performance comparison on the METEOR for the RefCOCOg and Visual Genome datasets. (Zero-Shot) refers to zero-shot transfer.
-        </h2>
-      </div>
-    </div>
-    <div class="hero-body">
-      <img src="assets/unispector_overview.jpg" alt="Method image" class="teaser-image" style="margin-left: auto; margin-right: auto; display: block; width: 60%; height: 60%">
-    </div>
-  </div>
-</section>
-
-
-<!--BibTex citation-->
-  <section class="section hero" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@article{lim2025UniSpector,
-  title={UniSpector: Unique Region Caption Anything},
-  author={Lim, Sangbeom and Kim, Junwan and Yoon, Heeji and Jung, Jaewoo and Kim, Seungryong},
-  journal={arXiv preprint arXiv:2504.05305},
-  year={2025}
-}</code></pre>
-    </div>
-</section>
-<!--End BibTex citation-->
-
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
-          </p>
+            <div class="tldr-box">
+                <div class="tldr-content">
+                    <span class="tldr-label">TL;DR</span>
+                    <p class="tldr-text">
+                        We propose <span class="tldr-highlight">UniSpector</span>, a <span class="tldr-highlight">scalable, retraining-free inspection system</span>. By employing a <b> semantically structured prompt topology</b>, it effectively handles open-set defects in <b>continuously evolving industrial environments</b> while offering insights into the design of generic visual prompting.
+                    </p>
+                </div>
+            </div>
 
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<!-- Statcounter tracking code -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const images = document.querySelectorAll(".teaser-image");
-    const zoomOverlay = document.createElement("div");
-    zoomOverlay.classList.add("zoom-overlay");
+    <!-- Abstract -->
+    <section id="abstract" class="section alt-bg">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-text">
+                <p>
+                  Although industrial inspection systems should be capable
+                  of recognizing unprecedented defects, most existing approaches
+                  operate under a closed-set assumption, which prevents
+                  them from detecting novel anomalies. While visual
+                  prompting offers a scalable alternative for industrial inspection,
+                  existing methods often suffer from prompt embedding
+                  collapse due to high intra-class variance and
+                  subtle inter-class differences. To resolve this, we propose
+                  UniSpector, which shifts the focus from naive prompt-to-region
+                  matching to the principled design of a semantically
+                  structured and transferable prompt topology. UniSpector
+                  employs the Spatial-Spectral Prompt Encoder to extract
+                  orientation-invariant, fine-grained representations; these
+                  serve as a solid basis for the Contrastive Prompt Encoder
+                  to explicitly regularize the prompt space into a semantically
+                  organized angular manifold. Additionally, Prompt-guided
+                  Query Selection generates adaptive object queries aligned
+                  with the prompt. We introduce Inspect Anything, the first
+                  benchmark for visual-prompt-based open-set defect localization,
+                  where UniSpector significantly outperforms baselines
+                  by at least 19.7% and 15.8% in AP50b and AP50m,
+                  respectively. These results show that our method enable a
+                  scalable, retraining-free inspection paradigm for continuously
+                  evolving industrial environments, while offering critical
+                  insights into the design of generic visual prompting.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    const zoomImage = document.createElement("img");
-    zoomOverlay.appendChild(zoomImage);
-    document.body.appendChild(zoomOverlay);
+    <!-- Motivation -->
+    <section id="motivation" class="section">
+        <div class="container">
+            <h2 class="section-title">Motivation</h2>
+            <div class="analysis-image-container">
+                <div class="analysis-image-frame--constrained">
+                    <img src="assets/inspection_comparison.png" alt="Inspection comparison: supervised detection, anomaly detection, and visual prompting" class="analysis-image zoomable-image">
+                </div>
+                <div style="margin-top: 2rem; margin-bottom: 4rem; padding: 1.25rem 1.5rem; background: var(--color-bg-alt); border-left: 3px solid var(--color-primary); border-radius: 0 8px 8px 0;">
+                    <p style="margin: 0 0 0.75rem 0; line-height: 1.6;">
+                        <b>(a)</b> While existing supervised detectors perform well in closed-set scenarios with fixed defect categories, such assumptions rarely hold in practice, as new defect types continuously emerge and the definition of “normal” may shift over time.
+                        <b>(b)</b> Anomaly detection methods do not support specifying a <i>defect of interest</i>; they only flag generic deviations from normality.
+                        <b>(c)</b> Visual prompting enables open-set recognition by aligning unseen defects with exemplar prompts, providing a scalable visual inspection framework.
+                    </p>
+                </div>
+            </div>
+            <div class="analysis-image-container">
+                <div class="analysis-image-frame--constrained">
+                    <img src="assets/prompt_embed_viz.png" alt="Prompt embedding collapse" class="analysis-image zoomable-image">
+                </div>
+                <div style="margin-top: 2rem; margin-bottom: 4rem; padding: 1.25rem 1.5rem; background: var(--color-bg-alt); border-left: 3px solid var(--color-primary); border-radius: 0 8px 8px 0;">
+                    <p style="margin: 0 0 0.75rem 0; line-height: 1.6;">
+                        <b>(b)</b> Existing Visual Prompting approaches treat prompt embeddings merely as implicit representations learned via prompt-to-region matching, which leads to prompt embedding collapse due to high intra-class variance and subtle inter-class difference in industrial domain. 
+                        <b>(a)</b> To overcome the collapse, we shift the focus from simple prompt-to-region matching to the principled design of a semantically structured and transferable prompt topology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    images.forEach((img) => {
-      // Preload high-res image if available
-      const highResSrc = img.getAttribute("data-highres");
-      if (highResSrc) {
-        const preloadImg = new Image();
-        preloadImg.src = highResSrc;
-      }
+    <!-- Method Section: Point Tracking (main contribution) -->
+    <section id="method" class="section alt-bg">
 
-      img.addEventListener("click", () => {
-        zoomImage.src = highResSrc || img.src;
-        zoomOverlay.classList.add("active");
-      });
-    });
+        <div class="container">
+            <h2 class="section-title">UniSpector</h2>
+            <!-- Architecture overview figure -->
+            <div class="analysis-image-container">
+                <img src="assets/unispector_overview.jpg" alt="Method Overview" class="analysis-image zoomable-image">
+            </div>
+            <div style="margin-top: 2rem; margin-bottom: 4rem; padding: 1.25rem 1.5rem; background: var(--color-bg-alt); border-left: 3px solid var(--color-primary); border-radius: 0 8px 8px 0;">
+                <p style="margin: 0 0 0.75rem 0; line-height: 1.6;">
+                    To mitigate prompt embedding collapse inherent in prompt-to-region matching due to high intra-class variance and subtle inter-class difference in industrial domain, UniSpector employs two critical components::
+                </p>
+                <ul style="margin: 0; padding-left: 1.25rem; list-style-type: disc;">
+                    <li style="margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.6;">
+                        <span class="phase-highlight"><b>Spatial-Spectral Prompt Encoder</b></span> — SSPE enhances inter-class separability by integrating
+                        fine-grained spectral descriptors to distinguish subtle
+                        textures beyond the pixel domain, while suppressing intraclass
+                        variance via orientation-invariant radial frequency
+                        cues to handle geometric rotations.
+                    </li>
+                    <li style="margin-bottom: 0; font-size: 1.05rem; line-height: 1.6;">
+                        <span class="phase-highlight"><b>Contrastive Prompt Encoding</b></span> — CPE explicitly regularizes the embedding manifold to establish
+                        a semantically organized angular topology, ensuring
+                        intra-class compactness and sufficient inter-class separation.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    // Close the zoom overlay when clicking anywhere on it.
-    zoomOverlay.addEventListener("click", () => {
-      zoomOverlay.classList.remove("active");
-      zoomImage.src = "";
-    });
+    <!-- Experiments: Tracking Results (main) -->
+    <section id="experiments" class="section">
+        <div class="container">
+            <h2 class="section-title">Experiments</h2>
 
-    // Allow closing with the ESC key.
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") zoomOverlay.classList.remove("active");
-    });
-  });
-</script>
-  </body>
-  </html>
+            <!-- Quantitative: RVOS benchmarks -->
+            <div id="sub-benchmarks" data-subsection class="results-block">
+                <h3 class="analysis-subtitle">Quantitative Results</h3>
+                <p>
+                    We introduce Inspect Anything (InsA), the first benchmark for visual-prompt-based open-set defect detection and segmentation under in-domain and cross-domain settings.
+                    For the <i>visual grounding</i> category, we evaluate models using a language description of the form
+                    <i>“a {defect_name} defect of the {product_name}”</i>.
+                </p>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">Methods</th>
+                                <th colspan="8"><i>In-domain</i></th>
+                                <th colspan="6"><i>Cross-domain</i></th>
+                                <th colspan="2"><i>Overall</i></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">GC10</th>
+                                <th colspan="2">MagneticTile</th>
+                                <th colspan="2">Real-IAD</th>
+                                <th colspan="2">MVTec AD</th>
+                                <th colspan="2">3CAD</th>
+                                <th colspan="2">VISION</th>
+                                <th colspan="2">VisA</th>
+                                <th colspan="2"><i>Avg</i></th>
+                            </tr>
+                            <tr>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                                <th>AP<sup>b</sup><sub>50</sub></th>
+                                <th>AP<sup>m</sup><sub>50</sub></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="17" style="text-align: left; font-style: italic; font-size: 0.95em; background-color: var(--color-bg-alt);"><b>visual grounding</b></td></tr>
+                            <tr>
+                                <td>GroundingDINO</td>
+                                <td>9.6</td><td>-</td>
+                                <td>26.7</td><td>-</td>
+                                <td>0.3</td><td>-</td>
+                                <td>1.4</td><td>-</td>
+                                <td>0.0</td><td>-</td>
+                                <td>0.0</td><td>-</td>
+                                <td>0.0</td><td>-</td>
+                                <td>5.4</td><td>-</td>
+                            </tr>
+                            <tr>
+                                <td>GroundingDINO†</td>
+                                <td>8.0</td><td>-</td>
+                                <td>11.0</td><td>-</td>
+                                <td>1.2</td><td>-</td>
+                                <td>18.8</td><td>-</td>
+                                <td>0.0</td><td>-</td>
+                                <td>0.0</td><td>-</td>
+                                <td>0.1</td><td>-</td>
+                                <td>5.6</td><td>-</td>
+                            </tr>
+                            <tr>
+                                <td>YOLO-World</td>
+                                <td>7.0</td><td>2.1</td>
+                                <td>30.7</td><td>28.6</td>
+                                <td>0.3</td><td>0.2</td>
+                                <td>2.7</td><td>2.4</td>
+                                <td>0.0</td><td>0.0</td>
+                                <td>0.3</td><td>0.3</td>
+                                <td>1.2</td><td>1.2</td>
+                                <td>6.0</td><td>5.0</td>
+                            </tr>
+                            <tr>
+                                <td>YOLO-World†</td>
+                                <td>3.4</td><td>1.5</td>
+                                <td>29.8</td><td>27.5</td>
+                                <td>21.7</td><td>16.7</td>
+                                <td>5.4</td><td>4.7</td>
+                                <td>0.0</td><td>0.0</td>
+                                <td>0.0</td><td>0.0</td>
+                                <td>1.7</td><td>1.6</td>
+                                <td>8.9</td><td>7.4</td>
+                            </tr>
+                            <tr><td colspan="17" style="text-align: left; font-style: italic; font-size: 0.95em; background-color: var(--color-bg-alt);"><b>visual prompting</b></td></tr>
+                            <tr>
+                                <td>SEEM</td>
+                                <td>-</td><td>0.2</td>
+                                <td>-</td><td>0.2</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.3</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.1</td>
+                            </tr>
+                            <tr>
+                                <td>SEEM†</td>
+                                <td>-</td><td>0.1</td>
+                                <td>-</td><td>0.6</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.1</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.0</td>
+                                <td>-</td><td>0.1</td>
+                            </tr>
+                            <tr>
+                                <td>SegGPT</td>
+                                <td>-</td><td>16.0</td>
+                                <td>-</td><td>20.1</td>
+                                <td>-</td><td>3.1</td>
+                                <td>-</td><td>6.8</td>
+                                <td>-</td><td>1.7</td>
+                                <td>-</td><td>0.9</td>
+                                <td>-</td><td>1.7</td>
+                                <td>-</td><td>7.2</td>
+                            </tr>
+                            <tr>
+                                <td>SINE</td>
+                                <td>0.7</td><td>0.5</td>
+                                <td>2.0</td><td>2.0</td>
+                                <td>0.6</td><td>0.5</td>
+                                <td>4.6</td><td>4.4</td>
+                                <td>0.1</td><td>0.2</td>
+                                <td>0.7</td><td>0.6</td>
+                                <td>0.9</td><td>0.9</td>
+                                <td>1.4</td><td>1.3</td>
+                            </tr>
+                            <tr>
+                                <td>SINE†</td>
+                                <td>0.9</td><td>0.9</td>
+                                <td>1.6</td><td>1.9</td>
+                                <td>1.2</td><td>0.5</td>
+                                <td>4.5</td><td>4.1</td>
+                                <td>0.1</td><td>0.1</td>
+                                <td>0.6</td><td>0.2</td>
+                                <td>1.0</td><td>0.8</td>
+                                <td>1.4</td><td>1.2</td>
+                            </tr>
+                            <tr>
+                                <td>DINOv</td>
+                                <td>3.2</td><td>0.8</td>
+                                <td>30.0</td><td>26.9</td>
+                                <td>2.2</td><td>1.4</td>
+                                <td>19.0</td><td>15.0</td>
+                                <td>4.1</td><td>2.1</td>
+                                <td>4.3</td><td>3.8</td>
+                                <td>8.4</td><td>7.0</td>
+                                <td>10.2</td><td>8.1</td>
+                            </tr>
+                            <tr>
+                                <td>DINOv†</td>
+                                <td>16.5</td><td>16.6</td>
+                                <td>48.4</td><td>39.6</td>
+                                <td>21.0</td><td>17.5</td>
+                                <td>15.9</td><td>15.2</td>
+                                <td>2.9</td><td>1.9</td>
+                                <td>4.6</td><td>3.8</td>
+                                <td>10.4</td><td>8.5</td>
+                                <td>17.1</td><td>14.7</td>
+                            </tr>
+                            <tr>
+                                <td>T-Rex2†</td>
+                                <td>32.4</td><td>33.9</td>
+                                <td>49.0</td><td>38.0</td>
+                                <td>25.1</td><td>28.8</td>
+                                <td>24.4</td><td>22.4</td>
+                                <td>4.3</td><td>2.9</td>
+                                <td>5.4</td><td>4.3</td>
+                                <td>7.8</td><td>6.7</td>
+                                <td>21.2</td><td>19.6</td>
+                            </tr>
+                            <tr>
+                                <td>YOLOE</td>
+                                <td>1.6</td><td>0.4</td>
+                                <td>48.3</td><td>45.4</td>
+                                <td>16.6</td><td>13.9</td>
+                                <td>26.9</td><td>22.7</td>
+                                <td>4.9</td><td>2.0</td>
+                                <td>7.2</td><td>5.9</td>
+                                <td>14.4</td><td>12.2</td>
+                                <td>17.1</td><td>14.6</td>
+                            </tr>
+                            <tr>
+                                <td>YOLOE†</td>
+                                <td>10.7</td><td>9.5</td>
+                                <td>43.3</td><td>41.8</td>
+                                <td>17.2</td><td>15.5</td>
+                                <td>25.8</td><td>23.9</td>
+                                <td>3.3</td><td>1.4</td>
+                                <td>3.5</td><td>3.0</td>
+                                <td>17.7</td><td>15.3</td>
+                                <td>17.4</td><td>15.8</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>UniSpector (Ours)†</strong></td>
+                                <td><strong>38.2</strong></td><td><strong>36.9</strong></td>
+                                <td><strong>63.3</strong></td><td><strong>57.7</strong></td>
+                                <td><strong>69.1</strong></td><td><strong>56.7</strong></td>
+                                <td><strong>53.5</strong></td><td><strong>46.5</strong></td>
+                                <td><strong>14.1</strong></td><td><strong>10.0</strong></td>
+                                <td><strong>15.3</strong></td><td><strong>12.5</strong></td>
+                                <td><strong>32.8</strong></td><td><strong>27.8</strong></td>
+                                <td><strong>40.9</strong></td><td><strong>35.4</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="results-caption">
+                    <p>
+                        Open-set detection and segmentation performance on the InsA. † denotes models fine-tuned on in-domain seen sets of InsA.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Qualitative -->
+            <div id="sub-qual" data-subsection class="results-block">
+                <h3 class="analysis-subtitle">Qualitative Results</h3>
+                <p>
+                    Given a user-specified region in the <span style="color: #e67e22; font-weight: 600;">prompt sample</span>,
+                    <span style="color: #76ff03; font-weight: 600;"><i>UniSpector</i></span> successfully identifies corresponding unseen defect instances in the <span style="color: #1565c0; font-weight: 600;">target image</span>, with <span style="color: #ff1744; font-weight: 600;">DINOv</span> included for comparison.
+                </p>
+                <div class="analysis-image-container">
+                    <img src="assets/pred_comparison.jpg" alt="Qualitative prediction comparison on InsA" class="analysis-image zoomable-image">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Citation Section -->
+    <section id="citation" class="citation-section">
+        <div class="container">
+            <h2 class="section-title" style="font-size: 1.5rem; border: none; margin-bottom: 1rem;">Citation</h2>
+            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+                If you find our work useful, please consider citing our paper.
+            </p>
+            <div class="citation-block group">
+                <button onclick="copyBibtex()" class="citation-copy-btn">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+                <pre class="citation-code"><code id="bibtex-text">
+TBU
+</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>UniSpector: Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in Animation
+        function initFadeInAnimations() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('.section, .hero-section, .citation-section, .footer');
+            sections.forEach(section => {
+                section.classList.add('fade-in-section');
+                observer.observe(section);
+            });
+        }
+
+        // Scroll Spy for Sidebar (with expandable sub-items)
+        function initScrollSpy() {
+            const sections = [...document.querySelectorAll('section[id]')];
+            const sidebarLinks = document.querySelectorAll('.sidebar-item');
+            const sidebarGroups = document.querySelectorAll('.sidebar-group');
+            const sidebar = document.querySelector('.sidebar');
+
+            function update() {
+                const mid = window.innerHeight * 0.5;
+
+                // Find active top-level section (last one whose top <= mid)
+                let activeSection = sections[0];
+                for (const s of sections) {
+                    if (s.getBoundingClientRect().top <= mid) activeSection = s;
+                }
+
+                // Find active sub-section within active section
+                const subs = [...activeSection.querySelectorAll('[data-subsection]')];
+                let activeSub = null;
+                for (const sub of subs) {
+                    if (sub.getBoundingClientRect().top <= mid) activeSub = sub;
+                }
+
+                // Reset all
+                sidebarLinks.forEach(link => link.classList.remove('active'));
+                sidebarGroups.forEach(group => group.classList.remove('expanded'));
+
+                // Highlight parent section link
+                const sectionLink = document.querySelector(`.sidebar-item[href="#${activeSection.id}"]`);
+                if (sectionLink) {
+                    sectionLink.classList.add('active');
+                    const group = sectionLink.closest('.sidebar-group');
+                    if (group) group.classList.add('expanded');
+                }
+
+                // Highlight sub-item (overrides parent highlight if found)
+                if (activeSub) {
+                    sectionLink && sectionLink.classList.remove('active');
+                    const subLink = document.querySelector(`.sidebar-sub-item[href="#${activeSub.id}"]`);
+                    if (subLink) {
+                        subLink.classList.add('active');
+                        const group = subLink.closest('.sidebar-group');
+                        if (group) group.classList.add('expanded');
+                    }
+                }
+
+                // Update gradient indicator position
+                const activeLink = document.querySelector('.sidebar-item.active');
+                if (activeLink) {
+                    const linkRect = activeLink.getBoundingClientRect();
+                    const sidebarRect = sidebar.getBoundingClientRect();
+                    sidebar.style.setProperty('--active-position', `${linkRect.top - sidebarRect.top - 32}px`);
+                }
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        }
+
+        function copyBibtex() {
+            const text = document.getElementById('bibtex-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.citation-copy-btn');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollSpy();
+            initFadeInAnimations();
+        });
+
+        // Image zoom functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll(".zoomable-image");
+            const zoomOverlay = document.createElement("div");
+            zoomOverlay.classList.add("zoom-overlay");
+
+            const zoomImage = document.createElement("img");
+            zoomOverlay.appendChild(zoomImage);
+            document.body.appendChild(zoomOverlay);
+
+            images.forEach((img) => {
+                // Preload high-res image if available
+                const highResSrc = img.getAttribute("data-highres");
+                if (highResSrc) {
+                    const preloadImg = new Image();
+                    preloadImg.src = highResSrc;
+                }
+
+                img.addEventListener("click", () => {
+                    zoomImage.src = highResSrc || img.src;
+                    zoomOverlay.classList.add("active");
+                });
+            });
+
+            // Close the zoom overlay when clicking anywhere on it
+            zoomOverlay.addEventListener("click", () => {
+                zoomOverlay.classList.remove("active");
+                zoomImage.src = "";
+            });
+
+            // Allow closing with the ESC key
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") zoomOverlay.classList.remove("active");
+            });
+        });
+    </script>
+</body>
+
+</html>
