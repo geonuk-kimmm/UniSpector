@@ -121,12 +121,7 @@ python demo_gradio.py --config CONFIG_FILE
 <p align="left">
   <img src="assets/gradio_example.png" alt="Gradio demo example (thumbnail)" width="40%">
 </p>
-<details>
-<summary>그림 확대해서 보기</summary>
-<p align="left">
-  <img src="assets/gradio_example.png" alt="Gradio demo example" width="85%">
-</p>
-</details>
+
 
 You can run inference on a single target image in the UI. For practical scenarios, we also supports iterating over every image under Target Path. Try these features in whatever way fits your own workflow.
 
