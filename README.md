@@ -6,7 +6,7 @@ Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Pr
 ---
 
 ## News
-- **[2026/04]** We release our code base for training, testing, and demo on our benchmark/tasks, built on [DINOv](https://github.com/UX-Decoder/DINOv). The full UniSpector implementation will be released soon.
+- 🔥 **[2026/04]** We release our code base for training, testing, and demo on our benchmark/tasks, built on [DINOv](https://github.com/UX-Decoder/DINOv). The full UniSpector implementation will be released soon.
 
 ---
 
@@ -95,8 +95,8 @@ We used PyTorch 2.4.1 and torchvision 0.19.1 with CUDA / nvcc 12.4 on NVIDIA H10
 ```bash
 export DETECTRON2_DATASETS=/path/to/{dataset_dir}
 ```
-<br>
-4.Download the annotation JSON from [Hugging Face](https://huggingface.co/datasets/geonuk-kimmm/Inspect-Anything). You can store it anywhere; pass the DATASET_JSON_PATH to `train_net.py` as `--data_json`.
+
+4.Download the annotation JSON from [HuggingFace](https://huggingface.co/datasets/geonuk-kimmm/Inspect-Anything). You can store it anywhere; pass the file path to `train_net.py` as `--data_json`.
 
 ---
 
@@ -119,10 +119,10 @@ python demo_gradio.py --config CONFIG_FILE
 
 
 <p align="left">
-  <img src="assets/gradio_example.png" alt="Gradio demo example" width="20%">
+  <img src="assets/gradio_example.png" alt="Gradio demo example" width="40%">
 </p>
 
-You can run inference on a single target image in the UI. For practical scenarios, the UI also supports iterating over every image under Target Path. Try these features in whatever way fits your own workflow.
+You can run inference on a single target image in the UI. For practical scenarios, we also supports iterating over every image under Target Path. Try these features in whatever way fits your own workflow.
 
 ---
 
