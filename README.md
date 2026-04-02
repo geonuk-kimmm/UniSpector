@@ -1,6 +1,7 @@
 # UniSpector
 Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR 2026)
 
+**[Project](https://geonuk-kimmm.github.io/UniSpector)** · **Paper** *(TBD)*
 
 ---
 
@@ -27,8 +28,8 @@ We used PyTorch 2.4.1 and torchvision 0.19.1 with CUDA / nvcc 12.4 on NVIDIA H10
 
 ---
 
-## Dataset Preparation
-1.Download the InsA benchmark datasets from the links below:
+## Inspect-Anything Dataset Preparation
+1.Download original images in benchmark datasets from the links below:
 <details>
 
 <summary><strong>Dataset links (click to expand)</strong></summary>
@@ -94,6 +95,8 @@ We used PyTorch 2.4.1 and torchvision 0.19.1 with CUDA / nvcc 12.4 on NVIDIA H10
 ```bash
 export DETECTRON2_DATASETS=/path/to/{dataset_dir}
 ```
+<br>
+4.Download the annotation JSON from [Hugging Face](https://huggingface.co/datasets/geonuk-kimmm/Inspect-Anything). You can store it anywhere; pass the DATASET_JSON_PATH to `train_net.py` as `--data_json`.
 
 ---
 
@@ -104,7 +107,7 @@ python train_net.py --config CONFIG_FILE --data_json DATASET_JSON_PATH
 ```
 
 - `CONFIG_FILE`: YAML config containing model setting, batch size, learning rate, and other options.
-- `DATASET_JSON_PATH`: COCO-format annotation JSON path.
+- `DATASET_JSON_PATH`: path to the InsA COCO-format JSON (see step 4 above).
 
 ---
 
@@ -113,6 +116,14 @@ python train_net.py --config CONFIG_FILE --data_json DATASET_JSON_PATH
 python demo_gradio.py --config CONFIG_FILE
 ```
 - `CONFIG_FILE`: YAML config containing model setting.
+
+
+<p align="left">
+  <img src="assets/gradio_example.png" alt="Gradio demo example" width="20%">
+</p>
+
+You can run inference on a single target image in the UI. For practical scenarios, the UI also supports iterating over every image under Target Path. Try these features in whatever way fits your own workflow.
+
 ---
 
 ## Evaluation
