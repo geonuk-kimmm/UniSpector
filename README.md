@@ -96,7 +96,7 @@ We used PyTorch 2.4.1 and torchvision 0.19.1 with CUDA / nvcc 12.4 on NVIDIA H10
 export DETECTRON2_DATASETS=/path/to/{dataset_dir}
 ```
 
-4.Download the annotation JSON from [HuggingFace](https://huggingface.co/datasets/geonuk-kimmm/Inspect-Anything). You can store it anywhere; pass the file path to `train_net.py` as `--data_json`.
+4.Download the annotation JSON from [HuggingFace](https://huggingface.co/datasets/geonuk-kimmm/Inspect-Anything). You can store it anywhere; pass the DATASET_JSON_PATH to `train_net.py` as `--data_json`.
 
 ---
 
@@ -119,8 +119,14 @@ python demo_gradio.py --config CONFIG_FILE
 
 
 <p align="left">
-  <img src="assets/gradio_example.png" alt="Gradio demo example" width="40%">
+  <img src="assets/gradio_example.png" alt="Gradio demo example (thumbnail)" width="40%">
 </p>
+<details>
+<summary>그림 확대해서 보기</summary>
+<p align="left">
+  <img src="assets/gradio_example.png" alt="Gradio demo example" width="85%">
+</p>
+</details>
 
 You can run inference on a single target image in the UI. For practical scenarios, we also supports iterating over every image under Target Path. Try these features in whatever way fits your own workflow.
 
