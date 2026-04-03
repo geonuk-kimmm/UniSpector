@@ -55,6 +55,7 @@ build model
 '''
 sam_cfg = args.conf_files
 opt = load_opt_from_config_file(sam_cfg)
+IMAGE_SIZE = int(opt["INPUT"]["IMAGE_SIZE"])
 
 # Global model handle
 global model_sam
@@ -81,11 +82,11 @@ def load_model(ckpt_path):
     return "Please provide a checkpoint path."
 
 @torch.no_grad()
-def _extract_prompt_embedding(in_context_examples, image_size=720):
+def _extract_prompt_embedding(in_context_examples):
     with torch.autocast(device_type='cuda', dtype=torch.float16):
         model = model_sam
         prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = get_prompt_feature(
-            model, in_context_examples, image_size=image_size
+            model, in_context_examples, image_size=IMAGE_SIZE
         )
     return prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w
 
@@ -96,7 +97,7 @@ def inference(*args, return_viz_only=True, **kwargs):
     image_tgt = args[-1]
     in_context_examples = args[:-1]
     prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = _extract_prompt_embedding(
-        in_context_examples, image_size=720
+        in_context_examples
     )
 
     with torch.autocast(device_type='cuda', dtype=torch.float16):
@@ -109,7 +110,7 @@ def inference(*args, return_viz_only=True, **kwargs):
             prompt_pad_h,
             prompt_pad_w,
             image_tgt,
-            image_size=720,
+            image_size=IMAGE_SIZE,
             threshold=0.1,
             **kwargs,
         )
@@ -118,44 +119,6 @@ def inference(*args, return_viz_only=True, **kwargs):
             return result[0]
         else:
             return result
-
-def calculate_image_statistics(images):
-    """Compute RGB mean and standard deviation from images."""
-   
-    valid_images = [img['image'] if isinstance(img, dict) else img for img in images if img is not None]
-    
-    # Merge all image pixels into one array
-    all_pixels = []
-    for img in valid_images:
-        # Ensure image is RGB with shape (H, W, 3)
-        if len(img.shape) == 3 and img.shape[2] == 3:
-            all_pixels.append(img)
-    
-    if not all_pixels:
-        return [0, 0, 0], [0, 0, 0]
-    
-    # Flatten and concatenate RGB pixels
-    pixels = np.concatenate([p.reshape(-1, 3) for p in all_pixels], axis=0)
-    
-    # Compute per-channel mean/std
-    means = np.mean(pixels, axis=0).tolist()  # [R_mean, G_mean, B_mean]
-    stds = np.std(pixels, axis=0).tolist()    # [R_std, G_std, B_std]
-    
-    return means, stds
-
-def update_pixel_stats(vp1, vp2, vp3, vp4, vp5, vp6, vp7, vp8):
-    """Set model pixel_mean / pixel_std from prompt images (input normalization)."""
-    global model_sam
-    images = [vp1, vp2, vp3, vp4, vp5, vp6, vp7, vp8]
-    means, stds = calculate_image_statistics(images)
-    
-    new_mean = torch.tensor(means, dtype=torch.float32).view(3, 1, 1).cuda()
-    new_std = torch.tensor(stds, dtype=torch.float32).view(3, 1, 1).cuda()
-    
-    model_sam.model.pixel_mean = new_mean
-    model_sam.model.pixel_std = new_std
-    
-    return f"Adapted input normalization to prompt images.\nMean: {means}\nStd: {stds}"
 
 def process_directory(target_path, result_path, generic_vp1, generic_vp2, generic_vp3, 
                 generic_vp4, generic_vp5, generic_vp6, generic_vp7, generic_vp8):
@@ -166,7 +129,7 @@ def process_directory(target_path, result_path, generic_vp1, generic_vp2, generi
     processed_files = []
     prompt_inputs = [generic_vp1, generic_vp2, generic_vp3, generic_vp4, generic_vp5, generic_vp6, generic_vp7, generic_vp8]
     prompt_features, prompt_attn_mask, prompt_pad_h, prompt_pad_w = _extract_prompt_embedding(
-        prompt_inputs, image_size=720
+            prompt_inputs
     )
     
     for file in os.listdir(target_path):
@@ -182,7 +145,7 @@ def process_directory(target_path, result_path, generic_vp1, generic_vp2, generi
                     prompt_pad_h,
                     prompt_pad_w,
                     target_img,
-                    image_size=720,
+                    image_size=IMAGE_SIZE,
                     threshold=0.1,
                 )
             if len(results)<3: # detected None, only return raw image
@@ -244,21 +207,11 @@ with demo:
             
             generic.render()
 
-            update_stats_btn = gr.Button("2) (optional) Adapt input normalization to prompt pixel distribution")
-            stats_status = gr.Textbox(label="Adaptation status", interactive=False)
-            
-            # Pixel statistics update event
-            update_stats_btn.click(
-                update_pixel_stats,
-                inputs=[generic_vp1, generic_vp2, generic_vp3, 
-                        generic_vp4, generic_vp5, generic_vp6, generic_vp7, generic_vp8],
-                outputs=[stats_status])
-            
             image_tgt.render()
             
             with gr.Row():
                 clearBtn = gr.ClearButton(components=[image_tgt])
-                runBtn = gr.Button("3) Inference on Target Image")
+                runBtn = gr.Button("2) Inference on Target Image")
         with gr.Column():
 
             gallery_tittle = gr.Markdown("")
@@ -269,7 +222,7 @@ with demo:
         target_path = gr.Textbox(label="Target Path", placeholder="Enter a folder path containing input images")
         target_results_path = gr.Textbox(label="Target Path Results", placeholder="Enter an output folder path for result images")
 
-    process_btn = gr.Button("4) Inference on Target Path")
+    process_btn = gr.Button("3) Inference on Target Path")
     result_text = gr.Textbox(label="Processing Result")
 
     process_btn.click(
@@ -296,9 +249,6 @@ with demo:
                        generic_vp5, generic_vp6, generic_vp7, generic_vp8, 
                        image_tgt],
                 outputs=[gallery_output])
-
-    # Pixel stats status output
-    
 
 def main():
     demo.queue().launch(share=False, server_port=args.port)
