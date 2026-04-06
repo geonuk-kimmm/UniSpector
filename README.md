@@ -1,7 +1,7 @@
 # UniSpector
 Towards Universal Open-set Defect Recognition via Spectral-Contrastive Visual Prompting (CVPR 2026)
 
-**[Project](https://geonuk-kimmm.github.io/UniSpector)** · **Paper** *(TBD)*
+**[Project](https://geonuk-kimmm.github.io/UniSpector)** · **[Paper](https://arxiv.org/abs/2604.02905)**
 
 ---
 
